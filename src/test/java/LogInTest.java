@@ -1,33 +1,19 @@
-import actions.LoginActions;
 import baseTests.BaseTest;
 import com.aventstack.extentreports.Status;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import services.LogInService;
-import services.LogOutService;
 import testCases.LoginTestCases;
 
 public class LogInTest extends BaseTest {
-    private LogInService logInService;
-    private LoginActions loginActions;
-    private LogOutService logOutService;
     private LoginTestCases loginTestCases;
     @BeforeEach
     public void initComponents(){
 
-        this.logInService = new LogInService(driver,wait);
-        this.loginActions = new LoginActions(driver,wait);
         this.loginTestCases = new LoginTestCases(driver, wait);
-        this.logOutService = new LogOutService(driver, wait);
-    }
-
-    @AfterEach
-    public void tearDown(){
     }
 
     @Order(2)
@@ -37,10 +23,8 @@ public class LogInTest extends BaseTest {
         logger.info("Perform a valid login with username and password.");
         test.log(Status.INFO,"Perform a valid login with username and password.");
 
-        boolean loginSuccessful = loginTestCases.Successful_Login(username, password);
-        Assertions.assertTrue(loginSuccessful, "Login was not Successful");
-
-        logOutService.performLogout();
+        boolean loginSuccessful = loginTestCases.successfulLogin(username, password);
+        Assertions.assertTrue(loginSuccessful, "Login was not successful");
     }
 
     @Order(1)
@@ -48,31 +32,30 @@ public class LogInTest extends BaseTest {
     public void login_Without_Credentials(){
         logger.info("Perform invalid login without credentials");
         test.log(Status.INFO, "Perform invalid login without credentials");
-        logInService.performLoginWithoutCredentials();
 
-        String errorMessage = loginActions.getErrorMessage();
-        Assertions.assertEquals("Epic sadface: Username is required", errorMessage, "Incorrect error message");
+        boolean failedLogin = loginTestCases.loginWithoutCredentials();
+        Assertions.assertTrue(failedLogin, "Incorrect error message");
     }
 
+    @Order(3)
     @ParameterizedTest
     @CsvFileSource(resources = "/testData/loginWithoutUsername.csv", numLinesToSkip = 1)
     public void login_Without_Username(String password){
         logger.info("Perform login without username");
         test.log(Status.INFO, "Perform login without username");
-        logInService.performLoginWithoutUsername(password);
 
-        String errorMessage = loginActions.getErrorMessage();
-        Assertions.assertEquals("Epic sadface: Username is required", errorMessage, "Incorrect error message");
+        boolean loginFailedWithoutUsername = loginTestCases.loginWithoutUsername(password);
+        Assertions.assertTrue(loginFailedWithoutUsername, "Invalid error message");
     }
 
+    @Order(4)
     @ParameterizedTest
     @CsvFileSource(resources = "/testData/loginWithout_Password.csv", numLinesToSkip = 1)
     public void login_Without_Password(String username){
         logger.info("Perform login without password");
         test.log(Status.INFO, "Perform login without password");
-        logInService.performLoginWithoutPassword(username);
 
-        String errorMessage = loginActions.getErrorMessage();
-        Assertions.assertEquals("Epic sadface: Password is required", errorMessage, "Incorrect error message");
+        boolean loginFailedWithoutPassword = loginTestCases.loginWithoutUsername(username);
+        Assertions.assertTrue(loginFailedWithoutPassword, "Invalid error message");
     }
 }
