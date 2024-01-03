@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.openqa.selenium.WebDriver;
@@ -23,23 +24,28 @@ public class BaseTest {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected Properties testProperties;
     protected ExtentReports extent;
     protected ExtentTest test;
     protected static final Logger logger = LogManager.getLogger(BaseTest.class);
 
     @BeforeAll
     public void baseSetUp() {
-        Properties testProperties = PropertyLoader.loadProperties();
+        testProperties = PropertyLoader.loadProperties();
         String reportPath = testProperties.getProperty("reportPath");
         extent = ExtentManager.getInstance(reportPath);
         test = ExtentManager.createTest(getClass().getSimpleName());
 
         driver = WebDriverSetup.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.get(testProperties.getProperty("URL"));
 
         logger.info("Setting up the test");
         test.log(Status.INFO, "Setting up the test");
+    }
+
+    @BeforeEach
+    public void openMainPage(){
+        driver.get(testProperties.getProperty("URL"));
     }
 
     @AfterAll
