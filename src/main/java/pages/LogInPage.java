@@ -20,4 +20,7 @@ public class LogInPage {
 
     @FindBy(id = "login-button")
     private WebElement loginButton;
+
+    @FindBy(xpath = "//*[@id=\"login_button_container\"]/div/form/div[3]/h3")
+    private WebElement loginErrorMessage;
 }
