@@ -6,12 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
 @Getter
 public class BrowsePage {
+
+    static String BROWSE_PAGE_URL = "https://www.saucedemo.com/inventory.html";
 
     public BrowsePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -43,7 +44,7 @@ public class BrowsePage {
     private WebElement cartButton;
 
     @FindBy(className = "product_sort_container")
-    private Select sortDropdown;
+    private WebElement sortDropdown;
 
     @FindBy(id = "logout_sidebar_link")
     private WebElement sidebarLogoutButton;
