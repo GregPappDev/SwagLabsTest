@@ -27,7 +27,8 @@ public class CartTest {
 
     @Test
     public void AddOneItemToCartSuccessfully(){
-        browseService.AddFirstItemToCart();
+        driver.get("https://www.saucedemo.com/");
+        browseService.AddFirstItemToCart("standard_user", "secret_sauce");
     }
 
 

@@ -1,4 +1,5 @@
 package services;
+import lombok.extern.java.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -11,31 +12,36 @@ import java.util.List;
 
 public class BrowseService {
 
-    final private BrowsePage _browsePage;
-    final private WebDriverWait _wait;
-    final private Logger _logger;
+    final private BrowsePage browsePage;
+    final private LogInService logInService;
+    final private WebDriverWait wait;
+    final private Logger logger;
 
     public BrowseService(WebDriver driver, WebDriverWait wait, Logger logger) {
-        _browsePage = new BrowsePage(driver);
-        _wait = wait;
-        _logger = logger;
+        this.browsePage = new BrowsePage(driver);
+        this.wait = wait;
+        this.logInService = new LogInService(driver, wait);
+        this.logger = logger;
     }
 
-    public void AddFirstItemToCart(){
-        if(_browsePage.getAllAddToCartButtons().size() > 0){
-            _browsePage.getAllAddToCartButtons().get(0).click();
+    public void AddFirstItemToCart(String userName, String password){
+        logInService.performLogin(userName, password);
+        if(browsePage.getAllAddToCartButtons().size() > 0){
+            browsePage.getAllAddToCartButtons().get(0).click();
         }
         else {
-            _logger.info("There are no 'Add to Cart' buttons on the page");
+            logger.info("There are no 'Add to Cart' buttons on the page");
         }
     }
 
-    public int AddAllItemsToCart(){
-        List<WebElement> allAddToCartButtons = _browsePage.getAllAddToCartButtons();
+    public int AddAllItemsToCart(String userName, String password){
+        logInService.performLogin(userName, password);
+
+        List<WebElement> allAddToCartButtons = browsePage.getAllAddToCartButtons();
         int counter = 0;
 
         if(allAddToCartButtons.isEmpty()){
-            _logger.info("There are no 'Add to Cart' buttons on the page");
+            logger.info("There are no 'Add to Cart' buttons on the page");
             return counter;
         }
 
@@ -45,6 +51,5 @@ public class BrowseService {
         }
         return counter;
     }
-
 
 }
