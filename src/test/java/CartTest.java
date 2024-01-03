@@ -59,10 +59,14 @@ public class CartTest extends CartBaseTest {
     @Order(3)
     @Test
     public void RemoveItemFromCartSuccessfully(){
-
+        // Arrange
         browseService.AddFirstItemToCart();
-        driver.get("https://www.saucedemo.com/cart.html");
+        driver.get(testProperties.getProperty("CART_URL"));
+
+        // Act
         cartService.removeItemFromCart();
+
+        // Assert
         int numberOfItemsInCart = cartService.numberOfItemsInCart();
         Assertions.assertEquals(0, numberOfItemsInCart);
     }
