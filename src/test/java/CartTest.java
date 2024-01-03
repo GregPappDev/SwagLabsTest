@@ -39,6 +39,17 @@ public class CartTest {
         Assertions.assertEquals(1, numberOfItemsInCart);
     }
 
+    @Test
+    public void AddAllItemsToCartSuccessfully(){
+        driver.get("https://www.saucedemo.com/");
+        int numberOfItemsAdded = browseService.AddAllItemsToCart("standard_user", "secret_sauce");
+        driver.get("https://www.saucedemo.com/cart.html");
+        int numberOfItemsInCart = cartService.numberOfItemsInCart();
+        Assertions.assertEquals(numberOfItemsAdded, numberOfItemsInCart);
+    }
+
+
+
 
     @AfterEach
     public void tearDown(){
