@@ -97,8 +97,11 @@ public class CartTest extends CartBaseTest {
         driver.get(testProperties.getProperty("CART_URL"));
 
         // Act
+        cartService.CompleteCheckoutWithCustomerInfo("a", "a", "a");
 
         // Assert
+        String pageTitle = driver.findElement(By.className("title")).getText();
+        Assertions.assertEquals("Checkout: Overview", pageTitle);
     }
 
 }
