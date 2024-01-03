@@ -13,6 +13,8 @@ import java.util.List;
 @Getter
 public class BrowsePage {
 
+    static String BROWSE_PAGE_URL = "https://www.saucedemo.com/inventory.html";
+
     public BrowsePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
