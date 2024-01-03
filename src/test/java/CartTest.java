@@ -31,9 +31,13 @@ public class CartTest extends CartBaseTest {
     @Order(1)
     @Test
     public void AddOneItemToCartSuccessfully(){
+        // Arrange
 
+        // Act
         browseService.AddFirstItemToCart();
-        driver.get("https://www.saucedemo.com/cart.html");
+
+        //Assert
+        driver.get(testProperties.getProperty("CART_URL"));
         int numberOfItemsInCart = cartService.numberOfItemsInCart();
         Assertions.assertEquals(1, numberOfItemsInCart);
     }
