@@ -3,8 +3,11 @@ package pages;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 @Getter
 public class CartPage {
@@ -16,6 +19,11 @@ public class CartPage {
 
     @FindBy(className = "cart_item")
     private WebElement cartItem;
+
+    @FindAll({
+            @FindBy(className = "cart_item")
+    })
+    private List<WebElement> listOfCartItems;
 
     @FindBy(id = "remove-sauce-labs-backpack")
     private WebElement backPackCartItem;
