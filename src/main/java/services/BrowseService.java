@@ -1,9 +1,11 @@
 package services;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BrowsePage;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 public class BrowseService {
@@ -25,6 +27,21 @@ public class BrowseService {
         else {
             _logger.info("There are no 'Add to Cart' buttons on the page");
         }
+    }
 
+    public int AddAllItemsToCart(){
+        List<WebElement> allAddToCartButtons = _browsePage.getAllAddToCartButtons();
+        int counter = 0;
+
+        if(allAddToCartButtons.isEmpty()){
+            _logger.info("There are no 'Add to Cart' buttons on the page");
+            return counter;
+        }
+
+        for (WebElement button : allAddToCartButtons) {
+            button.click();
+            counter++;
+        }
+        return counter;
     }
 }

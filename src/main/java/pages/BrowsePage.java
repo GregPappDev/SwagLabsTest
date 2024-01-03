@@ -63,9 +63,6 @@ public class BrowsePage {
     })
     private List<WebElement> ProductPrices;
 
-    @FindBy(xpath = "//*[contains(text(), 'Add to cart')]")
-    private WebElement addToCartButton;
-
     @FindAll({
             @FindBy(xpath = "//*[contains(text(), 'Add to cart')]")
     })
