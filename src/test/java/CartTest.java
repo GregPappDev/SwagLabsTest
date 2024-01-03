@@ -10,29 +10,32 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import services.BrowseService;
 import services.CartService;
+import services.LogInService;
 import utilities.WebDriverSetup;
 
 import java.time.Duration;
 
+import static utilities.WebDriverSetup.properties;
+
 public class CartTest extends CartBaseTest {
 
-    //private WebDriver driver;
     private BrowseService browseService;
+    private LogInService logInService;
     private CartService cartService;
-    //private WebDriverWait wait;
     private static  Logger logger = LogManager.getLogger(CartTest.class);
 
     @BeforeEach
     public void init(){
         browseService = new BrowseService(driver, wait, logger);
         cartService = new CartService(driver, wait, logger);
-
+        logInService = new LogInService(driver, wait);
+        logInService.performLogin(testProperties.getProperty("CORRECT_USER"), testProperties.getProperty("CORRECT_PASSWORD"));
     }
 
     @Order(1)
     @Test
     public void AddOneItemToCartSuccessfully(){
-        //driver.get("https://www.saucedemo.com/");
+
         browseService.AddFirstItemToCart("standard_user", "secret_sauce");
         driver.get("https://www.saucedemo.com/cart.html");
         int numberOfItemsInCart = cartService.numberOfItemsInCart();

@@ -24,10 +24,11 @@ public class CartBaseTest {
     protected ExtentReports extent;
     protected ExtentTest test;
     protected static final Logger logger = LogManager.getLogger(CartBaseTest.class);
+    protected Properties testProperties = PropertyLoader.loadProperties();
 
     @BeforeEach
     public void baseSetUp() {
-        Properties testProperties = PropertyLoader.loadProperties();
+
         String reportPath = testProperties.getProperty("reportPath");
         extent = ExtentManager.getInstance(reportPath);
         test = ExtentManager.createTest(getClass().getSimpleName());
