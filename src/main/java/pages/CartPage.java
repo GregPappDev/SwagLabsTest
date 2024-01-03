@@ -11,8 +11,6 @@ import java.util.List;
 
 @Getter
 public class CartPage {
-    static String CART_PAGE_URL = "https://www.saucedemo.com/cart.html";
-
     public CartPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

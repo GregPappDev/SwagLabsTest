@@ -89,4 +89,16 @@ public class CartTest extends CartBaseTest {
         Assertions.assertEquals("Products", pageTitle);
     }
 
+    @Order(5)
+    @Test
+    @DisplayName("Finish checkout process successfully")
+    public void FinishCheckOutProcessSuccessFully(){
+        // Arrange
+        driver.get(testProperties.getProperty("CART_URL"));
+
+        // Act
+
+        // Assert
+    }
+
 }
