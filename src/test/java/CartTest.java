@@ -30,6 +30,7 @@ public class CartTest extends CartBaseTest {
 
     @Order(1)
     @Test
+    @DisplayName("Add one item to cart")
     public void AddOneItemToCartSuccessfully(){
         // Arrange
 
@@ -44,6 +45,7 @@ public class CartTest extends CartBaseTest {
 
     @Order(2)
     @Test
+    @DisplayName("Add all items on page to cart")
     public void AddAllItemsToCartSuccessfully(){
         // Arrange
         int numberOfItemsAdded = browseService.AddAllItemsToCart();
@@ -58,6 +60,7 @@ public class CartTest extends CartBaseTest {
 
     @Order(3)
     @Test
+    @DisplayName("Remove item from cart")
     public void RemoveItemFromCartSuccessfully(){
         // Arrange
         browseService.AddFirstItemToCart();
@@ -71,6 +74,19 @@ public class CartTest extends CartBaseTest {
         Assertions.assertEquals(0, numberOfItemsInCart);
     }
 
+    @Order(4)
+    @Test
+    @DisplayName("Navigate to Product Page after clicking 'Continue Shopping'")
+    public void NavigateToProductsPage_AfterClickingContinueShopping(){
+        // Arrange
+        driver.get(testProperties.getProperty("CART_URL"));
 
+        // Act
+        cartService.ClickContinueShopping();
+
+        // Assert
+        String pageTitle = driver.findElement(By.className("title")).getText();
+        Assertions.assertEquals("Products", pageTitle);
+    }
 
 }

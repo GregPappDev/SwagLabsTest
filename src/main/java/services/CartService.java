@@ -33,4 +33,8 @@ public class CartService {
         itemsInCart.get(0).click();
     }
 
+    public void ClickContinueShopping(){
+        cartPage.getContinueShoppingButton().click();
+    }
+
 }
