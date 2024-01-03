@@ -39,4 +39,9 @@ public class CartPage {
 
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
+
+    @FindAll({
+            @FindBy(xpath = "//*[contains(text(), 'Remove')]")
+    })
+    private List<WebElement> listOfRemoveButtons;
 }

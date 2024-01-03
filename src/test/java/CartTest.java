@@ -48,6 +48,16 @@ public class CartTest {
         Assertions.assertEquals(numberOfItemsAdded, numberOfItemsInCart);
     }
 
+    @Test
+    public void RemoveItemFromCartSuccessfully(){
+        driver.get("https://www.saucedemo.com/");
+        browseService.AddFirstItemToCart("standard_user", "secret_sauce");
+        driver.get("https://www.saucedemo.com/cart.html");
+        cartService.removeItemFromCart();
+        int numberOfItemsInCart = cartService.numberOfItemsInCart();
+        Assertions.assertEquals(0, numberOfItemsInCart);
+    }
+
 
 
 
