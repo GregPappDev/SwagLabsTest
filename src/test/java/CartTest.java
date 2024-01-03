@@ -11,11 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import services.BrowseService;
 import services.CartService;
 import services.LogInService;
-import utilities.WebDriverSetup;
 
-import java.time.Duration;
-
-import static utilities.WebDriverSetup.properties;
 
 public class CartTest extends CartBaseTest {
 
@@ -36,7 +32,7 @@ public class CartTest extends CartBaseTest {
     @Test
     public void AddOneItemToCartSuccessfully(){
 
-        browseService.AddFirstItemToCart("standard_user", "secret_sauce");
+        browseService.AddFirstItemToCart();
         driver.get("https://www.saucedemo.com/cart.html");
         int numberOfItemsInCart = cartService.numberOfItemsInCart();
         Assertions.assertEquals(1, numberOfItemsInCart);
@@ -45,8 +41,8 @@ public class CartTest extends CartBaseTest {
     @Order(2)
     @Test
     public void AddAllItemsToCartSuccessfully(){
-        //driver.get("https://www.saucedemo.com/");
-        int numberOfItemsAdded = browseService.AddAllItemsToCart("standard_user", "secret_sauce");
+
+        int numberOfItemsAdded = browseService.AddAllItemsToCart();
         driver.get("https://www.saucedemo.com/cart.html");
         int numberOfItemsInCart = cartService.numberOfItemsInCart();
         Assertions.assertEquals(numberOfItemsAdded, numberOfItemsInCart);
@@ -55,8 +51,8 @@ public class CartTest extends CartBaseTest {
     @Order(3)
     @Test
     public void RemoveItemFromCartSuccessfully(){
-        //driver.get("https://www.saucedemo.com/");
-        browseService.AddFirstItemToCart("standard_user", "secret_sauce");
+
+        browseService.AddFirstItemToCart();
         driver.get("https://www.saucedemo.com/cart.html");
         cartService.removeItemFromCart();
         int numberOfItemsInCart = cartService.numberOfItemsInCart();

@@ -22,8 +22,7 @@ public class BrowseService {
         this.logger = logger;
     }
 
-    public void AddFirstItemToCart(String userName, String password){
-        logInService.performLogin(userName, password);
+    public void AddFirstItemToCart(){
         if(browsePage.getAllAddToCartButtons().size() > 0){
             browsePage.getAllAddToCartButtons().get(0).click();
         }
@@ -32,9 +31,7 @@ public class BrowseService {
         }
     }
 
-    public int AddAllItemsToCart(String userName, String password){
-        logInService.performLogin(userName, password);
-
+    public int AddAllItemsToCart(){
         List<WebElement> allAddToCartButtons = browsePage.getAllAddToCartButtons();
         int counter = 0;
 
