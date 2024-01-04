@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "action_test" ]
+    branches: [ "ci_cd" ]
   pull_request:
-    branches: [ "action_test" ]
+    branches: [ "ci_cd" ]
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    
+
     - name: Build
       run: mvn --batch-mode -D skipTests package
 
