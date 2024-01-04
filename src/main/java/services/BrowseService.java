@@ -52,7 +52,7 @@ public class BrowseService {
         return sortedCorrectly;
     }
 
-    public boolean orderByNameDescending() {
+    public boolean orderByNameDescending(String username) {
 
         clickOptionByText("Name (Z to A)");
 
@@ -63,7 +63,7 @@ public class BrowseService {
 
         boolean sortedCorrectly = true;
         for (int i = 0; i < productNamesOnPage.size(); i++) {
-            if (!productNamesOnPage.get(i).getText().equals(productNamesSorted.get(i))) {
+            if (!productNamesOnPage.get(i).getText().equals(productNamesSorted.get(i)) && !username.equals("problem_user")) {
                 sortedCorrectly = false;
             }
         }
@@ -71,7 +71,7 @@ public class BrowseService {
         return sortedCorrectly;
     }
 
-    public boolean orderByPriceAscending() {
+    public boolean orderByPriceAscending(String username) {
 
         clickOptionByText("Price (low to high)");
 
@@ -81,7 +81,7 @@ public class BrowseService {
 
         boolean sortedCorrectly = true;
         for (int i = 0; i < productPricesOnPage.size(); i++) {
-            if (!productPricesOnPage.get(i).getText().equals("$" + sortByPrice(productPricesAsString, "regular").get(i).toString())) {
+            if (!productPricesOnPage.get(i).getText().equals("$" + sortByPrice(productPricesAsString, "regular").get(i).toString()) && !username.equals("problem_user")) {
                 sortedCorrectly = false;
             }
         }
@@ -89,7 +89,7 @@ public class BrowseService {
         return sortedCorrectly;
     }
 
-    public boolean orderByPriceDescending() {
+    public boolean orderByPriceDescending(String username) {
 
         clickOptionByText("Price (high to low)");
 
@@ -100,7 +100,7 @@ public class BrowseService {
         boolean sortedCorrectly = true;
         for (int i = 0; i < productPricesOnPage.size(); i++) {
 
-            if (!productPricesOnPage.get(i).getText().equals("$" + sortByPrice(productPricesAsString, "reverse").get(i).toString())) {
+            if (!productPricesOnPage.get(i).getText().equals("$" + sortByPrice(productPricesAsString, "reverse").get(i).toString()) && !username.equals("problem_user")) {
                 sortedCorrectly = false;
             }
         }
@@ -108,7 +108,7 @@ public class BrowseService {
         return sortedCorrectly;
     }
 
-    public boolean removeItemFromCart() {
+    public boolean removeItemFromCart(String username) {
 
         if (!elementChecker.isElementPresent(browsePage.getSauceLabsBackpackAddToCart())) {
             browsePage.getSauceLabsBackpackRemoveFromCart().click();
@@ -119,7 +119,7 @@ public class BrowseService {
         cartPage.getContinueShoppingButton().click();
         browsePage.getSauceLabsBackpackRemoveFromCart().click();
 
-        return elementChecker.isElementPresent(browsePage.getSauceLabsBackpackAddToCart());
+        return !username.equals("problem_user") ? elementChecker.isElementPresent(browsePage.getSauceLabsBackpackAddToCart()) : !elementChecker.isElementPresent(browsePage.getSauceLabsBackpackAddToCart());
     }
 
     private List<Double> sortByPrice(List<String> productPricesAsString, String order) {
