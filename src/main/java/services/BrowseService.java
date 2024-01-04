@@ -1,4 +1,12 @@
 package services;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BrowsePage;
+
+import java.util.List;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,16 +23,46 @@ import java.util.List;
 
 public class BrowseService {
 
-    private WebDriverWait wait;
+   
     final private BrowsePage browsePage;
     final private CartPage cartPage;
     final private ElementChecker elementChecker;
+    final private LogInService logInService;
+    final private WebDriverWait wait;
+    final private Logger logger;
 
     public BrowseService(WebDriver driver, WebDriverWait wait) {
         this.wait = wait;
         this.browsePage = new BrowsePage(driver);
         this.cartPage = new CartPage(driver);
         this.elementChecker = new ElementChecker(driver);
+        this.logInService = new LogInService(driver, wait);
+        this.logger = logger;
+    }
+  
+    public void AddFirstItemToCart(){
+        if(browsePage.getAllAddToCartButtons().size() > 0){
+            browsePage.getAllAddToCartButtons().get(0).click();
+        }
+        else {
+            logger.info("There are no 'Add to Cart' buttons on the page");
+        }
+    }
+
+    public int AddAllItemsToCart(){
+        List<WebElement> allAddToCartButtons = browsePage.getAllAddToCartButtons();
+        int counter = 0;
+
+        if(allAddToCartButtons.isEmpty()){
+            logger.info("There are no 'Add to Cart' buttons on the page");
+            return counter;
+        }
+
+        for (WebElement button : allAddToCartButtons) {
+            button.click();
+            counter++;
+        }
+        return counter;
     }
 
 
@@ -137,4 +175,5 @@ public class BrowseService {
 
         return productPricesAsNumbers;
     }
+
 }
