@@ -33,6 +33,17 @@ jobs:
 
     - name: Test
       run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+      env:
+          webDriver: web-driver.chrome.driver
+          webDriverPath: chromedriver
+          URL: https://www.saucedemo.com/
+          BROWSE_URL: https://www.saucedemo.com/inventory.html
+          CART_URL: https://www.saucedemo.com/cart.html
+          CHECKOUT_STEP_ONE_URL: https://www.saucedemo.com/checkout-step-one.html
+          CHECKOUT_STEP_TWO_URL: https://www.saucedemo.com/checkout-step-two.html
+          CORRECT_USER: standard_user
+          CORRECT_PASSWORD: secret_sauce
+          reportPath: reports/extent-report.html
 
     - name: Report
       uses: dorny/test-reporter@v1
