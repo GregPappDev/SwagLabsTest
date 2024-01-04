@@ -19,4 +19,8 @@ public class CartService {
     public int numberOfItemsInCart(){
         return cartPage.getListOfCartItems().size();
     }
+
+    public void clickCheckoutButton(){
+        cartPage.getCheckoutButton().click();
+    }
 }
