@@ -39,7 +39,7 @@ public class BrowseTest {
     }
 
     @AfterAll
-    private void tearDown() {
+    private static void tearDown() {
         driver.close();
     }
 
