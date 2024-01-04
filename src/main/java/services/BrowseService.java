@@ -1,6 +1,4 @@
 package services;
-import lombok.extern.java.Log;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,8 +22,7 @@ public class BrowseService {
         this.logger = logger;
     }
 
-    public void AddFirstItemToCart(String userName, String password){
-        logInService.performLogin(userName, password);
+    public void AddFirstItemToCart(){
         if(browsePage.getAllAddToCartButtons().size() > 0){
             browsePage.getAllAddToCartButtons().get(0).click();
         }
@@ -34,9 +31,7 @@ public class BrowseService {
         }
     }
 
-    public int AddAllItemsToCart(String userName, String password){
-        logInService.performLogin(userName, password);
-
+    public int AddAllItemsToCart(){
         List<WebElement> allAddToCartButtons = browsePage.getAllAddToCartButtons();
         int counter = 0;
 

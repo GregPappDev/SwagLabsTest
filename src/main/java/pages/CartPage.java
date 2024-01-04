@@ -11,8 +11,6 @@ import java.util.List;
 
 @Getter
 public class CartPage {
-    static String CART_PAGE_URL = "https://www.saucedemo.com/cart.html";
-
     public CartPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -39,4 +37,9 @@ public class CartPage {
 
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
+
+    @FindAll({
+            @FindBy(xpath = "//*[contains(text(), 'Remove')]")
+    })
+    private List<WebElement> listOfRemoveButtons;
 }
