@@ -2,6 +2,7 @@ package utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.Properties;
 
@@ -13,7 +14,11 @@ public class WebDriverSetup {
         properties = PropertyLoader.loadProperties();
         if (driver == null){
             System.setProperty(properties.getProperty("webDriver"), properties.getProperty("webDriverPath"));
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         }
         return driver;

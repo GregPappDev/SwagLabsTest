@@ -1,0 +1,55 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build
+      run: mvn --batch-mode -D skipTests package
+
+    - name: Test
+      run: mvn --batch-mode -D maven.test.failure.ignore=true test
+      env:
+          webDriver: web-driver.chrome.driver
+          webDriverPath: chromedriver
+          URL: https://www.saucedemo.com/
+          BROWSE_URL: https://www.saucedemo.com/inventory.html
+          CART_URL: https://www.saucedemo.com/cart.html
+          CHECKOUT_STEP_ONE_URL: https://www.saucedemo.com/checkout-step-one.html
+          CHECKOUT_STEP_TWO_URL: https://www.saucedemo.com/checkout-step-two.html
+          CORRECT_USER: standard_user
+          CORRECT_PASSWORD: secret_sauce
+          reportPath: reports/extent-report.html
+
+    - name: Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: Maven Tests
+        path: target/surefire-reports/*.xml
+        reporter: java-junit
+        fail-on-error: true

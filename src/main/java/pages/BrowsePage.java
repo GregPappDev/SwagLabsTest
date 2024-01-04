@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class BrowsePage {
     private WebElement cartButton;
 
     @FindBy(className = "product_sort_container")
-    private Select sortDropdown;
+    private WebElement sortDropdown;
 
     @FindBy(id = "logout_sidebar_link")
     private WebElement sidebarLogoutButton;

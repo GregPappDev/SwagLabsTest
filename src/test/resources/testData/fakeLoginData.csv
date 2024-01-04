@@ -1,2 +1,4 @@
 username, password
 invalid_user, wrong_password
+invalid_user1, wrong_password1
+invalid_user2, wrong_password2

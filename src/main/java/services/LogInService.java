@@ -24,4 +24,8 @@ public class LogInService {
     public void performLoginWithoutPassword(String username){
         loginActions.enterUsername(username);
         loginActions.clickLoginButton();}
+
+    public String getErrorMessage(){
+        return loginActions.getErrorMessage();
+    }
 }
