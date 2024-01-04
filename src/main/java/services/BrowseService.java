@@ -31,7 +31,7 @@ public class BrowseService {
     final private WebDriverWait wait;
     final private Logger logger;
 
-    public BrowseService(WebDriver driver, WebDriverWait wait) {
+    public BrowseService(WebDriver driver, WebDriverWait wait, Logger logger) {
         this.wait = wait;
         this.browsePage = new BrowsePage(driver);
         this.cartPage = new CartPage(driver);

@@ -25,7 +25,7 @@ public class BrowseTest extends BaseTest {
     public void setUp() {
 
         this.loginService = new LogInService(driver, wait);
-        this.browseService = new BrowseService(driver, wait);
+        this.browseService = new BrowseService(driver, wait, logger);
         this.logOutService = new LogOutService(driver, wait);
     }
 
