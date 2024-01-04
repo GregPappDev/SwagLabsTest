@@ -29,10 +29,10 @@ jobs:
         cache: maven
     
     - name: Build
-      run: mvn --batch-mode -DskipTests package
+      run: mvn --batch-mode -D skipTests package
 
     - name: Test
-      run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+      run: mvn --batch-mode -D maven.test.failure.ignore=true test
       env:
           webDriver: web-driver.chrome.driver
           webDriverPath: chromedriver
