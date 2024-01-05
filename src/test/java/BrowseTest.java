@@ -31,7 +31,7 @@ public class BrowseTest extends BaseTest {
 
 
     @AfterEach
-    private void logout() {
+    public void logout() {
         logOutService.performLogout();
     }
 
