@@ -36,8 +36,7 @@ public class BaseTest {
         extent = ExtentManager.getInstance(reportPath);
         test = ExtentManager.createTest(getClass().getSimpleName());
 
-        driver = WebDriverSetup.getDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
 
         logger.info("Setting up the test");
         test.log(Status.INFO, "Setting up the test");
@@ -45,6 +44,8 @@ public class BaseTest {
 
     @BeforeEach
     public void openMainPage(){
+        driver = WebDriverSetup.getDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.get(testProperties.getProperty("URL"));
     }
 
