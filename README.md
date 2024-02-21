@@ -1,6 +1,6 @@
 # <p align="center">`SwagLabsTest`</br></br>SwagLabs webshop test automation project</p>
 
-### <p align="center"><em>Welcome to the SwagLabsTest project's GitHub page!</em></p>
+<em>Welcome to the SwagLabsTest project's GitHub page! It is a comprehensive webshop test automation project designed to ensure the functionality and reliability of the SauceDemo web application. This project utilizes various technologies and tools to automate test cases, manage code, and implement a CI/CD pipeline.</em>
 </br>
 
 ## <p align="center">Key Features</p>
@@ -14,14 +14,29 @@
 <p align="center"><em>Thank you for your interest in SwagLabsTest!</em></p>
 </br></br>
 
-## Technologies and systems
+## Technologies and Systems
 
-- **Selenium**
-- **Jira**
-- **Page Object Model**
+#### Automation Framework
+- **Selenium** 
+Framework used for web browser automation to interact with the SauceDemo application.
+- **Page Object Model (POM)** 
+Design pattern organizes web elements and actions into page classes for better maintainability.
 - **Page Factory**
+Framework for simplifying the handling of web elements in Selenium WebDriver tests.
+- **Lombok**
+Simplifies Java code by providing annotations.
+
+#### Test Execution and Management
+- **Jira** 
+Utilized for issue tracking and project management.
 - **Katalon Studio**
+Facilitates test case development, execution, and management.
+
+#### Continuous Integration and Deployment
 - **GitHub Action**
+Integrated with the GitHub repository to automate the CI/CD pipeline.
+- **Containerization**
+Optional feature for containerizing the application.
 
 ## Administraion
 
